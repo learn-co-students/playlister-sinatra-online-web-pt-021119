@@ -22,19 +22,15 @@ class LibraryParser
 
   def call
     files.each do |filename|
-      parts = parse_filename(filename)
+	  parts = parse_filename(filename)
       build_objects(*parts)
     end
   end
 
   def build_objects(artist_name, song_name, genre_name)
     song = Song.create(name: song_name)
-    genre = Genre.find_or_create_by(name: genre_name)
-    artist = Artist.find_or_create_by(name: artist_name)
-
-    song.song_genres.build(genre: genre)
-    song.artist = artist
-    
+    song.genres << Genre.find_or_create_by(name: genre_name)
+    song.artist = Artist.find_or_create_by(name: artist_name)
     song.save
   end
 end
