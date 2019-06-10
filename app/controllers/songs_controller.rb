@@ -1,7 +1,7 @@
 require 'rack-flash'
 
 class SongsController < ApplicationController
-  use Rack::Flash
+  #use Rack::Flash
 
   get '/songs' do
     @songs = Song.all
@@ -9,7 +9,7 @@ class SongsController < ApplicationController
   end
 
   get '/song/:slug' do
-    
+
   end
 
 end
