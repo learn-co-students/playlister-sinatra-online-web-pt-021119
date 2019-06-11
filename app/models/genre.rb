@@ -4,15 +4,11 @@ class Genre < ActiveRecord::Base
   has_many :artists, through: :songs
 
   def slug
-    split_name = self.name.downcase.split(" ")
-    slug_name = split_name.join("-")
+    name.downcase.gsub(" ","-")
   end
 
   def self.find_by_slug(slug)
-    slug_name = slug.split("-").collect do |word|
-      word.capitalize
-    end.join(" ")
-    self.find_by(name: slug_name)
+    Genre.all.find { |song| song.slug == slug }
   end
 
 end
